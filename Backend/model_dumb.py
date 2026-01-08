@@ -1,7 +1,7 @@
 import joblib
 import xgboost as xgb
 
-model_dumb = joblib.load(rf"/Users/kaew/Desktop/ngebakadfl/Model_Dumbxgb_model_[_EDA_Phasic_EmotiBit_, _EDA_Tonic_EmotiBit_, _BMI_, _SkinTemp_Emo_].pkl")
+model_dumb = joblib.load(rf"D:\Thermal_comfort\train_test_Model\2Class\Set6\rf_model.pkl")
 
 #"D:\Work\Project\Model_Dumb\Model_Dumbxgb_model_['EDA_Phasic_EmotiBit', 'EDA_Tonic_EmotiBit', 'BMI', 'SkinTemp_Emo'].pkl"
 
