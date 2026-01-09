@@ -1,3 +1,4 @@
+from fastapi import APIRouter
 import neurokit2 as nk
 import numpy as np
 import pandas as pd
@@ -5,6 +6,7 @@ from datetime import datetime
 from firebase_admin import db
 from apscheduler.schedulers.background import BackgroundScheduler
 
+router = APIRouter(prefix="/eda", tags=["EDA"])
 raw_eda_data = []
 scheduler = BackgroundScheduler()
 
@@ -103,8 +105,6 @@ def collect_and_process_eda():
         store_processed_eda_to_firebase(eda_phasic, eda_tonic)
         raw_eda_data = []
 
-
-# -------------------- Scheduler --------------------
 def schedule_preprocessing_interval():
     scheduler.add_job(
         collect_and_process_eda,
@@ -114,10 +114,10 @@ def schedule_preprocessing_interval():
     )
     scheduler.start()
 
-
+@router.post("/start_schedule_preprocessing_eda")
 async def start_schedule_preprocessing_eda():
     try:
         schedule_preprocessing_interval()
-        return {"message": "Started scheduling preprocessing"}
+        return {"message": "Started EDA preprocessing scheduler"}
     except Exception as e:
         return {"error": str(e)}
